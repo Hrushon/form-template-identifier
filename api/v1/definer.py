@@ -5,7 +5,7 @@ from typing import Dict, List, Optional, Union
 from fastapi import HTTPException
 from tinydb.table import Document
 
-from db_working import search_documents
+from app_db.db_working import search_documents
 from settings import REGEX_PATERNS
 
 

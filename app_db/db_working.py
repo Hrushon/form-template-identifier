@@ -3,7 +3,7 @@ from typing import List, Union
 from tinydb import TinyDB, Query
 from tinydb.table import Document
 
-from db_work.test_data import TEST_DATA
+from app_db.test_data import TEST_DATA
 from settings import DB_NAME
 
 db: TinyDB = TinyDB(DB_NAME)
