@@ -2,7 +2,7 @@
 ![TinyDB](https://img.shields.io/badge/TinyDB-4.7.0-red?style=for-the-badge&logo=tinydb&logoColor=blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.88.0-blueviolet?style=for-the-badge&logo=fastapi&logoColor=yellow)
 
-# FORM TEMPLATE IDENTIFIER
+# Form Template Identifier
 ## Приложение для определения заполненных форм
 
 Приложение позволяет определить название формы, хранящейся в собственной базе данных, соответствующей данным, поступившим от пользователя. При отсутствии подходящей формы в базе данных динамически создает и возвращает форму с названием и типом полей, соответствующими данным пользователя.
