@@ -6,7 +6,9 @@ from typing import Dict, List, Union
 
 from tinydb import TinyDB
 
-db: TinyDB = TinyDB('forms_db.json')
+from settings import DB_NAME
+
+db: TinyDB = TinyDB(DB_NAME)
 
 test_data: List[Dict[str, Union[str, List[Dict[str, str]]]]] = [
     {

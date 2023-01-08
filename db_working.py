@@ -3,7 +3,9 @@ from typing import List, Union
 from tinydb import TinyDB, Query
 from tinydb.table import Document
 
-db: TinyDB = TinyDB('forms_db.json')
+from settings import DB_NAME
+
+db: TinyDB = TinyDB(DB_NAME)
 
 
 def search_documents(data) -> Union[List[Document], List]:

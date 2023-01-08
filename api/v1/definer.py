@@ -5,16 +5,7 @@ from fastapi import HTTPException
 from tinydb.table import Document
 
 from db_working import search_documents
-
-ETALONS: Dict[str, str] = {
-    'date': r'''
-        ^((0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).((1[0-9]|20)\d\d))
-        |(((1[0-9]|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))$
-    ''',
-    'phone': r'^\+7[0-9]{10}$',
-    'email': r'^.+@.+\..+$',
-    'text': r'^.+$'
-}
+from settings import REGEX_PATERNS
 
 
 def types_definer(data: Dict[str, str]) -> Dict[str, str]:
@@ -24,7 +15,7 @@ def types_definer(data: Dict[str, str]) -> Dict[str, str]:
     и типом данных этого поля.
     """
     for name, val in data.items():
-        for name_type, etalon in ETALONS.items():
+        for name_type, etalon in REGEX_PATERNS.items():
             if re.match(etalon, val, re.X):
                 data[name] = name_type
                 break
