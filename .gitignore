@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 forms_db.json
+default_db.json
