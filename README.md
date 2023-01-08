@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ```
 Добавляем тестовые документы в базу данных:
 ```
-python -m db_work.db_working
+python -m app_db.db_working
 ```
 Тестируем проект:
 ```
