@@ -1,16 +1,6 @@
-"""
-При выполнении данного модуля происодит добавление тестовых
-данных в базу TinyDB.
-"""
 from typing import Dict, List, Union
 
-from tinydb import TinyDB
-
-from settings import DB_NAME
-
-db: TinyDB = TinyDB(DB_NAME)
-
-test_data: List[Dict[str, Union[str, List[Dict[str, str]]]]] = [
+TEST_DATA: List[Dict[str, Union[str, List[Dict[str, str]]]]] = [
     {
         'form_name': 'Birthday',
         'fields': [{
@@ -54,6 +44,3 @@ test_data: List[Dict[str, Union[str, List[Dict[str, str]]]]] = [
         }]
     }
 ]
-
-if __name__ == '__main__':
-    db.insert_multiple(test_data)

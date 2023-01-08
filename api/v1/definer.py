@@ -1,4 +1,5 @@
 import re
+from http import HTTPStatus
 from typing import Dict, List, Optional, Union
 
 from fastapi import HTTPException
@@ -54,8 +55,8 @@ def forms_definer(data: Dict[str, str]) -> Dict[str, str]:
             form_name: str = search_result['form_name']
         except KeyError:
             raise HTTPException(
-                status_code=500,
-                detail="Нарушена структура документов в базе данных."
+                status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
+                detail='Нарушена структура документов в базе данных.'
             )
         return {'form_name': form_name}
 

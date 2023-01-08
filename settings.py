@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DB_NAME: str = os.getenv('DB_NAME', default='forms_db.json')
+DB_NAME: str = os.getenv('DB_NAME', default='default_db.json')
 
 REGEX_PATERNS: Dict[str, str] = {
     'date': r'''
