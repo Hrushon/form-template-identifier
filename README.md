@@ -43,6 +43,24 @@ pytest -v
 python main.py
 ```
 
+### Структура базы данных:
+
+Пример структуры базы данных:
+```
+TEST_DATA: List[Dict[str, Union[str, List[Dict[str, str]]]]] = [
+    {
+        'form_name': 'Birthday',
+        'fields': [{
+            'username': 'text',
+            'birthday_date': 'date'
+        }]
+    },
+    {
+        ...
+    }
+]
+```
+
 ### Структура env-файла:
 
 Создаем и открываем для редактирования файл .env:
