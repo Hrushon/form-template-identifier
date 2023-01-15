@@ -5,8 +5,8 @@ from typing import Dict, List, Optional, Union
 from fastapi import HTTPException
 from tinydb.table import Document
 
-from app_db.db_working import search_documents
-from settings import REGEX_PATERNS
+from fti.app_db.db_working import search_documents
+from fti.settings import REGEX_PATERNS
 
 
 def types_definer(data: Dict[str, str]) -> Dict[str, str]:

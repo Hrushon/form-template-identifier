@@ -3,7 +3,7 @@ from http import HTTPStatus
 from fastapi.testclient import TestClient
 from tinydb import TinyDB
 
-from api.v1.views import app
+from fti.api.v1.views import app
 
 db = TinyDB('default_db.json')
 

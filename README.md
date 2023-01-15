@@ -34,7 +34,7 @@ pip install -r requirements.txt
 ```
 Добавляем тестовые документы в базу данных:
 ```
-python -m app_db.db_working
+python -m fti.app_db.db_working
 ```
 Тестируем проект:
 ```
@@ -51,7 +51,7 @@ DB_NAME='forms_db.json'
 ```
 Запускаем проект:
 ```
-python main.py
+python -m fti.main
 ```
 
 ### Второй вариант (Docker)
