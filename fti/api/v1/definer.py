@@ -40,10 +40,10 @@ def forms_definer(data: Dict[str, str]) -> Dict[str, str]:
     search_result: Optional[Document] = None
 
     for form in forms:
-        fields: Dict[str, str] = form['fields'][0]
+        fields: Dict[str, str] = form['fields']
         count_form: int = len(fields)
         if search_result:
-            if len(search_result['fields'][0]) > count_form:
+            if len(search_result['fields']) > count_form:
                 continue
         merge_dict: Dict[str, str] = {**data_with_types, **fields}
         if len(merge_dict) == count_data:

@@ -2,6 +2,7 @@ from typing import List, Union
 
 from tinydb import TinyDB, Query
 from tinydb.table import Document
+from tinydb.utils import freeze
 
 from fti.app_db.test_data import TEST_DATA
 from fti.settings import DB_NAME
@@ -11,22 +12,24 @@ db: TinyDB = TinyDB(DB_NAME)
 
 def search_documents(data) -> Union[List[Document], List]:
     """
-    Придумать поисковый запрос к Tiny, чтобы удовлетворить требования ТЗ, не
-    получилось. Поэтому функция при обращении к БД получает и возвращает все
-    документы, у которых хотя бы одно поле и тип значения поля соответствует
+    Функция при обращении к БД получает и возвращает все документы,
+    у которых хотя бы одно поле и тип значения поля соответствует
     данным, полученным от клиента.
-    Поисковый запрос создается на "лету".
     """
-    count_data: int = len(data)
-    query_string: str = str()
-    cnt: int = 0
-    for key, value in data.items():
-        query_string += f'(Query().fields.any(Query()["{key}"] == "{value}"))'
-        cnt += 1
-        if cnt != count_data:
-            query_string += ' | '
+    def test_func(document, value):
+        """
+        Функция сравнивает данные документов в БД с данными клиента,
+        обеспечивая фильтрацию и неободимую выборку. Если в документе
+        БД есть поле, отсутствующее в данных клиента, или тип
+        поля не соответствует типу поля в полученных от клиента данных, то
+        документ в результирующую выборку не попадает.
+        """
+        for key in document:
+            if key not in value or value[key] != document[key]:
+                return False
+        return True
 
-    return db.search(eval(query_string))
+    return db.search(Query().fields.test(test_func, freeze(data)))
 
 
 def add_test_data_db():
