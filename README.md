@@ -80,10 +80,10 @@ sudo docker run --name fti -it -p 8000:8000 fti
 TEST_DATA: List[Dict[str, Union[str, List[Dict[str, str]]]]] = [
     {
         'form_name': 'Birthday',
-        'fields': [{
+        'fields': {
             'username': 'text',
             'birthday_date': 'date'
-        }]
+        }
     },
     {
         ...
