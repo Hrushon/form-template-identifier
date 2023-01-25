@@ -80,15 +80,17 @@ def test_get_form_with_unknown_fields():
 def test_get_form_with_fail_db_structure():
     wrong_doc = db.insert({
         'name': 'Address',
-        'fields': [{
+        'fields': {
             'home': 'text'
-        }]
+        }
     })
-    response = client.post(
-        '/get_form/?home=Moscow&sex=male&date=21.01.1999'
-    )
-    assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
-    assert response.json() == {
-        'detail': 'Нарушена структура документов в базе данных.'
-    }
-    db.remove(doc_ids=[wrong_doc])
+    try:
+        response = client.post(
+            '/get_form/?home=Moscow&sex=male&date=21.01.1999'
+        )
+        assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
+        assert response.json() == {
+            'detail': 'Нарушена структура документов в базе данных.'
+        }
+    finally:
+        db.remove(doc_ids=[wrong_doc])
