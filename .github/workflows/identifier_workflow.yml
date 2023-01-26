@@ -17,9 +17,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
         pip install -r ./requirements.txt
-    - name: Test with flake8 and api tests
+    - name: Test with flake8 and pytest
       run: |
         python -m flake8
+        python -m fti.app_db.db_working
+        pytest -v
+        rm 'default_db.json'
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
@@ -44,3 +47,14 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: hrushon/fti:workflow
+
+  send_message:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+    - name: send message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: ${{ github.workflow }} успешно выполнен!
