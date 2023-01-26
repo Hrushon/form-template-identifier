@@ -1,12 +1,13 @@
 import re
 from http import HTTPStatus
+from itertools import product
 from typing import Dict, List, Optional, Union
 
 from fastapi import HTTPException
 from tinydb.table import Document
 
 from fti.app_db.db_working import search_documents
-from fti.settings import REGEX_PATERNS
+from fti.settings import REGEX_PATTERNS
 
 
 def types_definer(data: Dict[str, str]) -> Dict[str, str]:
@@ -15,11 +16,11 @@ def types_definer(data: Dict[str, str]) -> Dict[str, str]:
     регулярными выражениями, по итогу возвращает словарь с названием поля
     и типом данных этого поля.
     """
-    for name, val in data.items():
-        for name_type, etalon in REGEX_PATERNS.items():
-            if re.match(etalon, val, re.X):
-                data[name] = name_type
-                break
+    for (name, val), (name_type, etalon) in product(
+        data.items(), REGEX_PATTERNS.items()
+    ):
+        if re.match(etalon, val, re.X):
+            data[name] = name_type
     return data
 
 
