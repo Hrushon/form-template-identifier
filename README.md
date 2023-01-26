@@ -1,3 +1,5 @@
+![Workflow](https://github.com/Hrushon/form-template-identifier/actions/workflows/identifier_workflow.yml/badge.svg)
+
 ![Python](https://img.shields.io/badge/Python-3.8.9-blue?style=for-the-badge&logo=python&logoColor=yellow)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.88.0-blueviolet?style=for-the-badge&logo=fastapi&logoColor=green)
 ![TinyDB](https://img.shields.io/badge/TinyDB-4.7.0-red?style=for-the-badge&logo=tinydb&logoColor=blue)
