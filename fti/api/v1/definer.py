@@ -1,6 +1,5 @@
 import re
 from http import HTTPStatus
-from itertools import product
 from typing import Dict, List, Optional, Union
 
 from fastapi import HTTPException
@@ -15,12 +14,22 @@ def types_definer(data: Dict[str, str]) -> Dict[str, str]:
     Определяет тип данных полей переданных клиентом, сравнивая значения с
     регулярными выражениями, по итогу возвращает словарь с названием поля
     и типом данных этого поля.
+    Как по мне, множественные ветви сравнения выглядят не очень красиво,
+    да и такой подход вставляет палки в колеса будущей масштабируемости,
+    но придумать что-то лучше и производительнее я не смог.
+    Вложенный цикл медленнее и не по-питонячи, а 'itertools.product'
+    еще медленнее вложенного цикла.
     """
-    for (name, val), (name_type, etalon) in product(
-        data.items(), REGEX_PATTERNS.items()
-    ):
-        if re.match(etalon, val, re.X):
-            data[name] = name_type
+    for name, value in data.items():
+        if re.match(REGEX_PATTERNS['date'], value, re.X):
+            data[name] = 'date'
+        elif re.match(REGEX_PATTERNS['phone'], value, re.X):
+            data[name] = 'phone'
+        elif re.match(REGEX_PATTERNS['email'], value, re.X):
+            data[name] = 'email'
+        elif re.match(REGEX_PATTERNS['text'], value, re.X):
+            data[name] = 'text'
+
     return data
 
 
