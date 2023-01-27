@@ -55,11 +55,9 @@ def forms_definer(data: Dict[str, str]) -> Dict[str, str]:
         if search_result:
             if len(search_result['fields']) > count_form:
                 continue
-        merge_dict: Dict[str, str] = {**data_with_types, **fields}
-        if len(merge_dict) == count_data:
-            search_result = form
-            if count_form == count_data:
-                break
+        search_result = form
+        if count_form == count_data:
+            break
 
     if search_result:
         try:
